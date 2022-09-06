@@ -1,6 +1,8 @@
 const boom = require('@hapi/boom');
 const faker = require('faker');
 
+const { models } = require('../libs/sequelize');
+
 class CategoriesService {
   constructor() {
     this.categories = [];
@@ -45,8 +47,11 @@ class CategoriesService {
       },
     ]);
   }
-  find() {
-    return this.categories;
+  async find() {
+    const rta = await models.Categories.findAll();
+
+    return rta;
+    // return this.categories;
   }
   create(data) {
     const newCategory = {
