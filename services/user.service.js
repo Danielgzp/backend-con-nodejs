@@ -36,28 +36,31 @@ class UsersService {
     const rta = await models.User.findAll();
     return rta;
   }
-  
-  findOne(id) {
-    return this.users.find((item) => item.id === id);
+
+  async findOne(id) {
+    const user = await models.User.findByPk(id);
+    if (!user) {
+      //BOOM para manejar los errores
+      throw boom.notFound('User not found');
+    }
+    return user;
   }
 
-  create(data) {
-    const newUser = {
-      id: faker.datatype.uuid(),
-      ...data,
-    };
-    this.users.push(newUser);
+  async create(data) {
+    const newUser = await models.User.create(data);
+
     return newUser;
   }
 
-  delete(id) {
-    const index = this.users.findIndex((item) => item.id === id);
-    if (index === -1) {
-      throw new Error('product not found');
-    }
-    // lo mismo que en products
-    this.users.splice(index, 1);
+  async update(id, changes) {
+    const user = await this.findOne(id);
+    const rta = await user.update(changes);
+    return rta;
+  }
 
+  async delete(id) {
+    const user = await this.findOne(id);
+    await user.destroy();
     return { id };
   }
 }
