@@ -16,6 +16,10 @@ const sequelize = new Sequelize(URI, {
 });
 
 setupModels(sequelize);
-sequelize.sync();
+// lee los modelos y crea las tables
+//En este curso lo ejamos de utilizar ya que no es recomdable hacer sync en modo produccion 
+//por lo cual hacemos migraciones
+
+/* sequelize.sync(); */
 
 module.exports = sequelize;
