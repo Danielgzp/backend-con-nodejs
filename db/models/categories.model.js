@@ -8,10 +8,14 @@ const CategoriesSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  categoryName: {
+  name: {
     allowNull: false,
     type: DataTypes.STRING,
-    field: 'category_name',
+    unique: true
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   createdAt: {
     allowNull: false,
@@ -22,7 +26,14 @@ const CategoriesSchema = {
 };
 
 class Categories extends Model {
-  static associate() {}
+  static associate(models) {
+    //hasMany: puede tener muchos productos
+    this.hasMany(models.Products, {
+      as: 'products',
+      //alias o el nombre de la relacion nque definimos en el model de products
+      foreignKey: 'categoryId',
+    });
+  }
   static config(sequelize) {
     return {
       sequelize,
@@ -34,3 +45,5 @@ class Categories extends Model {
 }
 
 module.exports = { Categories, CategoriesSchema, CATEGORIES_TABLE };
+
+

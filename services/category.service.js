@@ -48,22 +48,26 @@ class CategoriesService {
     ]);
   }
   async find() {
-    const rta = await models.Categories.findAll();
+    const categories = await models.Categories.findAll();
 
-    return rta;
+    return categories;
     // return this.categories;
   }
-  create(data) {
-    const newCategory = {
-      id: faker.datatype.uuid(),
-      ...data,
-    };
-    this.categories.push(newCategory);
+  async create(data) {
+    const newCategory = await models.Categories.create(data);
+    
     return newCategory;
   }
 
-  findOne(id) {
-    return this.categories.find((item) => item.id === id);
+  async findOne(id) {
+    const category = await models.Categories.findByPk(id, {
+      include: ['products']
+    });
+    if (!category) {
+      throw boom.notFound('category not found');
+    }
+
+    return category;
   }
 
   update(id, changes) {
