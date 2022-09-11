@@ -20,6 +20,11 @@ const UserSchema = {
     field: 'create_at',
     defaultValue: Sequelize.NOW,
   },
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'customer',
+  },
 };
 class User extends Model {
   static associate() {}

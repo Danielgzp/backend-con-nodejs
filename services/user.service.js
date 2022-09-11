@@ -38,6 +38,7 @@ class UsersService {
   }
 
   async findOne(id) {
+    //find by private key, es decir buscar por el id o el valor que le solicitemos
     const user = await models.User.findByPk(id);
     if (!user) {
       //BOOM para manejar los errores
