@@ -20,6 +20,7 @@ class CustomerService {
   }
 
   async create(data) {
+    //aqui a la hroa de crear el customer de una ves creamos tambien al usuario gracias a la relacion 1-1
     const newCustomer = await models.Customer.create(data, {
       include: ['user'],
     });
