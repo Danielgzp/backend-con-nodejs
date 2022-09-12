@@ -5,9 +5,13 @@ const { models } = require('../libs/sequelize');
 class OrderService {
   constructor() {}
 
-  async create(data) {
-    const newOrder = await models.Order.create(data);
-    return newOrder;
+  async addItem(data) {
+    const newItem = await models.OrderProduct.create(data);
+
+    if (!newItem) {
+      throw boom.notFound('product not found');
+    }
+    return newItem;
   }
 
   async find() {
@@ -20,11 +24,12 @@ class OrderService {
     const order = await models.Order.findByPk(id, {
       include: [
         {
-          //aqui hacemos una asociacion doble, a la orden le asociamos al 
-          //cliente, y a ese cliente le asociamos el usuario 
+          //aqui hacemos una asociacion doble, a la orden le asociamos al
+          //cliente, y a ese cliente le asociamos el usuario
           association: 'customer',
           include: ['user'],
         },
+        'items',
       ],
     });
 
