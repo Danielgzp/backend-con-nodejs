@@ -14,6 +14,7 @@ module.exports = {
   production: {
     url: config.dbUrl,
     dialect: 'postgres',
+    //Para el ssl reglas para deploy con heroku
     dialectOptions: {
       ssl: {
         rejectUnauthorized: false,
