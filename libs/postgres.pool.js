@@ -12,7 +12,7 @@ if (config.isProduction) {
     rejectUnauthorized: false,
   };
 } else {
-  //Si es produccion manejamos la concecion de la misma forma que veniamos haciendo colocando manualmente las variables de entorno
+  //Si es desarrollo manejamos la coneccion de la misma forma que veniamos haciendo colocando manualmente las variables de entorno
   //para crear la url
   const USER = encodeURIComponent(config.dbUser);
   const PASSWORD = encodeURIComponent(config.dbPassword);
