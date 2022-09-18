@@ -12,6 +12,8 @@ const options = {
 };
 
 if (config.isProduction) {
+
+  //Recordar este tipo de configraicoens es para deploys con Heroku
   options.dialectOptions = {
     ssl: {
       rejectUnauthorized: false,
