@@ -3,9 +3,10 @@ version: '3.3'
 services:
   postgres:
     image: postgres:13
+    container_name: dbdaniel
     environment:
-      - POSTGRES_DB=my_store
-      - POSTGRES_USER=nico
+      - POSTGRES_DB=daniel_store
+      - POSTGRES_USER=danielgzp
       - POSTGRES_PASSWORD=admin123
     ports:
       - 5432:5432
