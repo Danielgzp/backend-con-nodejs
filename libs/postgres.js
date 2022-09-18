@@ -14,6 +14,8 @@
 
 // module.exports = getConnection;
 
+//ya esto no se usa
+
 const { Client } = require('pg');
 const { config } = require('./../config/config');
 

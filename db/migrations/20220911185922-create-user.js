@@ -36,6 +36,8 @@ module.exports = {
   },
 };
 
+////No es nada buena practica hacer las migraciones en archivos separados
+
 
 /*
 
