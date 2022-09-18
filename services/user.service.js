@@ -34,7 +34,7 @@ class UsersService {
 
   async find() {
     const rta = await models.User.findAll({
-      include: ['customer']
+      include: ['customer'],
     });
     return rta;
   }
@@ -46,6 +46,17 @@ class UsersService {
       //BOOM para manejar los errores
       throw boom.notFound('User not found');
     }
+    return user;
+  }
+
+  //este metodo es para la autenticacion y encontrar el usuario a partir del email
+  async findByEmail(email) {
+    const user = await models.User.findOne({
+      //el where dice que bsuque hasta que encuentre en la DB un email igual al que se envia
+      //por parametro
+      where: { email },
+    });
+    
     return user;
   }
 

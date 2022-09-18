@@ -26,6 +26,9 @@ const options = {
 };
 app.use(cors(options));
 
+//haciendo el llamando al archivo de las autenticaiones
+require('./utils/auth');
+
 //definimos la ruta
 // tiene un callback que va a ejecutar la respuesta que enviemos al cliente.
 //el callback siempre tiene dos parámetros "req" y "res".
