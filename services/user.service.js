@@ -55,6 +55,19 @@ class UsersService {
     return newUser;
   }
 
+  //Asi hubiera creado el crear el usuario haciendo el hash como en la clase del curso
+  /*
+  async create(data) {
+    const hash = await bcrypt.hash(data.password, 10);
+    const newUser = await models.User.create({
+      ...data,
+      password: hash
+    });
+    delete newUser.dataValues.password;
+    return newUser;
+  }
+  */
+
   async update(id, changes) {
     const user = await this.findOne(id);
     const rta = await user.update(changes);

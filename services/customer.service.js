@@ -5,10 +5,11 @@ class CustomerService {
   constructor() {}
 
   async find() {
-    const rta = await models.Customer.findAll({
+    const customer = await models.Customer.findAll({
       include: ['user'],
     });
-    return rta;
+
+    return customer;
   }
 
   async findOne(id) {
@@ -26,6 +27,25 @@ class CustomerService {
     });
     return newCustomer;
   }
+  //Asi hubiera creado el crear el customer haciendo el hash como en la clase del curso
+  /*
+  async create(data) {
+    const hash = await bcrypt.hash(data.user.password, 10);
+    const newData = {
+      ...data,
+      user: {
+        ...data.user,
+        password: hash
+      }
+    }
+    const newCustomer = await models.Customer.create(newData, {
+      include: ['user']
+    });
+    /// Esta es para eliminarl el password /////
+    delete newCustomer.dataValues.user.dataValues.password;
+    return newCustomer;
+  }
+    */
 
   async update(id, changes) {
     const model = await this.findOne(id);

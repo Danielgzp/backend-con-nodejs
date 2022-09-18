@@ -3,6 +3,8 @@ const express = require('express');
 const routerApi = require('./routes');
 //importar las funciones que se uilizarán
 const { logErrors, errorHandler } = require('./middlewares/error.handler');
+//pARA AUTORIZACION DE LA API KEY
+const { checkApiKey } = require('./middlewares/auth.handler');
 const cors = require('cors');
 
 // creamos una aplicación
@@ -33,7 +35,7 @@ app.get('/', (req, res) => {
 
 //le decimos a la aplicación en que puesto escuchar
 // además creamos un callback que nos avisará cuando esté corriendo
-app.get('/nueva-ruta', (req, res) => {
+app.get('/api/v1/nueva-ruta', checkApiKey, (req, res) => {
   res.send('hola, esta es una nueva ruta o end-point');
 });
 

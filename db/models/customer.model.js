@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 const { USER_TABLE } = require('./user.model');
 
@@ -61,6 +62,25 @@ class Customer extends Model {
       tableName: CUSTOMER_TABLE,
       modelName: 'Customer',
       timestamps: false,
+      /* Podemos utlizar los hooks con sequelize para que realice el hash de la contraseña 
+      antes de guardar los datos. Solo hay que agregar la opción hooks en el método 
+      config de la clase User que se encuentra en user.model.js*/
+      hooks: {
+        beforeCreate: async (customer) => {
+          //aqui estamos encriptando la contraseña para la tabla de los usuarios
+          //la libreria bcrypt funcioan de forma asincrona
+          // bcrypt.hash(user.password, 10) es el metodo que crea el hash para la password
+          const password = await bcrypt.hash(customer.user.password, 10);
+          customer.password = password;
+        },
+        //En la clase del curso igualmente lo hacia en el servicio
+        afterCreate: async (customer) => {
+          //dataValues es en sequelize, en otra db podria ser solo delete customer.password
+          delete customer.user.dataValues.password;
+        },
+      },
+      /* De esta forma podemos evitar realizar el hash en los servicios user y customer
+       y dejarlos como estaban anteriormente.*/
     };
   }
 }
