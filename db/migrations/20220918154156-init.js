@@ -1,5 +1,8 @@
 'use strict';
 
+//Configuracion de las migraciones apra cear las tablas de la BD en un solo archivo 
+//en una unica migracion
+
 const { DataTypes, Sequelize } = require('sequelize');
 const { USER_TABLE, UserSchema } = require('../models/user.model');
 const { CUSTOMER_TABLE, CustomerSchema } = require('../models/customer.model');
