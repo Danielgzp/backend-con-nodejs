@@ -66,14 +66,15 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
+    await queryInterface.dropTable(ORDER_PRODUCT_TABLE);
+    await queryInterface.dropTable(ORDER_TABLE);
+    await queryInterface.dropTable(CATEGORIES_TABLE);
     await queryInterface.dropTable(CUSTOMER_TABLE);
+    //Colocar products enciam de categories, ya que uan depende de la otra al momento de borrar
+    await queryInterface.dropTable(PRODUCTS_TABLE);
     //Colocar users por encima de customers, ya que una depende de la otra al momento de borrar
     await queryInterface.dropTable(USER_TABLE);
     //Colocar products enciam de categories, ya que uan depende de la otra al momento de borrar
-    await queryInterface.dropTable(PRODUCTS_TABLE);
-    await queryInterface.dropTable(CATEGORIES_TABLE);
-    await queryInterface.dropTable(ORDER_TABLE);
-    await queryInterface.dropTable(ORDER_PRODUCT_TABLE);
   },
 };
 
