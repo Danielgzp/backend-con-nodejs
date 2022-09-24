@@ -29,7 +29,7 @@ module.exports = {
         email: 'surperadmin@mail.com',
         password: hash,
         role: 'admin',
-        created_at: new Date(),
+        createdAt: new Date(),
       },
     ]);
 
