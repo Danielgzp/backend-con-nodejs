@@ -26,7 +26,6 @@ module.exports = {
     const hash = await bcrypt.hash('admin123', 10);
     await queryInterface.bulkInsert(USER_TABLE, [
       {
-        username: 'admin',
         email: 'surperadmin@mail.com',
         password: hash,
         role: 'admin',
