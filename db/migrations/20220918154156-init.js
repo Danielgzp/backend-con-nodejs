@@ -17,9 +17,24 @@ const {
   ORDER_PRODUCT_TABLE,
 } = require('../models/order-product.model');
 
+const bcrypt = require('bcrypt');
+
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.createTable(USER_TABLE, UserSchema);
+    //Esto es para crear un usuario admin por default al correr la migracio
+    const hash = await bcrypt.hash('admin123', 10);
+    await queryInterface.bulkInsert(USER_TABLE, [
+      {
+        username: 'admin',
+        email: 'surperadmin@mail.com',
+        password: hash,
+        role: 'admin',
+        created_at: new Date(),
+      },
+    ]);
+
+    //
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
     await queryInterface.createTable(CATEGORIES_TABLE, CategoriesSchema);
     await queryInterface.createTable(PRODUCTS_TABLE, ProductsSchema);
