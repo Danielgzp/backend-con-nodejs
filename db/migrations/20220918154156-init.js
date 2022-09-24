@@ -1,6 +1,6 @@
 'use strict';
 
-//Configuracion de las migraciones apra cear las tablas de la BD en un solo archivo 
+//Configuracion de las migraciones apra cear las tablas de la BD en un solo archivo
 //en una unica migracion
 
 const { DataTypes, Sequelize } = require('sequelize');
@@ -54,8 +54,9 @@ module.exports = {
   down: async (queryInterface) => {
     await queryInterface.dropTable(USER_TABLE);
     await queryInterface.dropTable(CUSTOMER_TABLE);
-    await queryInterface.dropTable(CATEGORIES_TABLE);
+    //Colocar products enciam de categories, ya que uan depende de la otra al momento de borrar
     await queryInterface.dropTable(PRODUCTS_TABLE);
+    await queryInterface.dropTable(CATEGORIES_TABLE);
     await queryInterface.dropTable(ORDER_TABLE);
     await queryInterface.dropTable(ORDER_PRODUCT_TABLE);
   },
