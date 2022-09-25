@@ -66,13 +66,15 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
+
+    /* Este es el orden correcto para borrar las tablas de la base de datos */
     await queryInterface.dropTable(ORDER_PRODUCT_TABLE);
     await queryInterface.dropTable(ORDER_TABLE);
     //Colocar products encima de categories, ya que una depende de la otra al momento de borrar
     await queryInterface.dropTable(PRODUCTS_TABLE);
     await queryInterface.dropTable(CATEGORIES_TABLE);
     await queryInterface.dropTable(CUSTOMER_TABLE);
-    //Colocar users por encima de customers, ya que una depende de la otra al momento de borrar
+    //Colocar customers por encima de users, ya que una depende de la otra al momento de borrar
     await queryInterface.dropTable(USER_TABLE);
   },
 };
